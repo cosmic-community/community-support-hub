@@ -14,7 +14,8 @@ export async function getUsers(): Promise<User[]> {
     if (hasStatus(error) && error.status === 404) {
       return []
     }
-    throw new Error('Failed to fetch users')
+    console.error('Error fetching users:', error)
+    return []
   }
 }
 
@@ -29,7 +30,8 @@ export async function getUserBySlug(slug: string): Promise<User | null> {
     if (hasStatus(error) && error.status === 404) {
       return null
     }
-    throw new Error('Failed to fetch user')
+    console.error('Error fetching user by slug:', error)
+    return null
   }
 }
 
@@ -38,7 +40,7 @@ export async function getQuestions(): Promise<Question[]> {
   try {
     const response = await cosmic.objects
       .find({ type: 'questions' })
-      .props(['id', 'title', 'slug', 'metadata'])
+      .props(['id', 'title', 'slug', 'metadata', 'created_at'])
       .depth(1)
       .sort('-created_at')
     
@@ -47,7 +49,8 @@ export async function getQuestions(): Promise<Question[]> {
     if (hasStatus(error) && error.status === 404) {
       return []
     }
-    throw new Error('Failed to fetch questions')
+    console.error('Error fetching questions:', error)
+    return []
   }
 }
 
@@ -55,7 +58,7 @@ export async function getQuestionBySlug(slug: string): Promise<Question | null> 
   try {
     const response = await cosmic.objects
       .findOne({ type: 'questions', slug })
-      .props(['id', 'title', 'slug', 'metadata'])
+      .props(['id', 'title', 'slug', 'metadata', 'created_at'])
       .depth(2)
     
     return response.object as Question
@@ -63,7 +66,8 @@ export async function getQuestionBySlug(slug: string): Promise<Question | null> 
     if (hasStatus(error) && error.status === 404) {
       return null
     }
-    throw new Error('Failed to fetch question')
+    console.error('Error fetching question by slug:', slug, error)
+    return null
   }
 }
 
@@ -74,7 +78,7 @@ export async function getFeaturedQuestions(): Promise<Question[]> {
         type: 'questions',
         'metadata.is_featured': true
       })
-      .props(['id', 'title', 'slug', 'metadata'])
+      .props(['id', 'title', 'slug', 'metadata', 'created_at'])
       .depth(1)
       .limit(5)
     
@@ -83,7 +87,8 @@ export async function getFeaturedQuestions(): Promise<Question[]> {
     if (hasStatus(error) && error.status === 404) {
       return []
     }
-    throw new Error('Failed to fetch featured questions')
+    console.error('Error fetching featured questions:', error)
+    return []
   }
 }
 
@@ -95,7 +100,7 @@ export async function getAnswersByQuestionId(questionId: string): Promise<Answer
         type: 'answers',
         'metadata.question': questionId
       })
-      .props(['id', 'title', 'slug', 'metadata'])
+      .props(['id', 'title', 'slug', 'metadata', 'created_at'])
       .depth(1)
       .sort('-metadata.helpful_count')
     
@@ -104,7 +109,8 @@ export async function getAnswersByQuestionId(questionId: string): Promise<Answer
     if (hasStatus(error) && error.status === 404) {
       return []
     }
-    throw new Error('Failed to fetch answers')
+    console.error('Error fetching answers for question:', questionId, error)
+    return []
   }
 }
 
@@ -121,7 +127,8 @@ export async function getBadges(): Promise<Badge[]> {
     if (hasStatus(error) && error.status === 404) {
       return []
     }
-    throw new Error('Failed to fetch badges')
+    console.error('Error fetching badges:', error)
+    return []
   }
 }
 
@@ -141,7 +148,8 @@ export async function getUserBadges(userId: string): Promise<UserBadge[]> {
     if (hasStatus(error) && error.status === 404) {
       return []
     }
-    throw new Error('Failed to fetch user badges')
+    console.error('Error fetching user badges:', error)
+    return []
   }
 }
 
@@ -150,7 +158,7 @@ export async function searchQuestions(query: string): Promise<Question[]> {
   try {
     const response = await cosmic.objects
       .find({ type: 'questions' })
-      .props(['id', 'title', 'slug', 'metadata'])
+      .props(['id', 'title', 'slug', 'metadata', 'created_at'])
       .depth(1)
       .sort('-created_at')
     
@@ -165,6 +173,7 @@ export async function searchQuestions(query: string): Promise<Question[]> {
     if (hasStatus(error) && error.status === 404) {
       return []
     }
-    throw new Error('Failed to search questions')
+    console.error('Error searching questions:', error)
+    return []
   }
 }
