@@ -2,6 +2,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cosmic } from '@/lib/cosmic'
 import bcrypt from 'bcryptjs'
 
+interface UserObject {
+  id: string
+  metadata: {
+    username: string
+    email: string
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -35,9 +43,9 @@ export async function POST(request: NextRequest) {
         .find({ type: 'users' })
         .props(['id', 'metadata'])
 
-      const users = existingUser.objects
-      const existingUsername = users.find(u => u.metadata.username === user.metadata.username)
-      const existingEmail = users.find(u => u.metadata.email === user.metadata.email)
+      const users = existingUser.objects as UserObject[]
+      const existingUsername = users.find((u: UserObject) => u.metadata.username === user.metadata.username)
+      const existingEmail = users.find((u: UserObject) => u.metadata.email === user.metadata.email)
 
       if (existingUsername) {
         return NextResponse.json(

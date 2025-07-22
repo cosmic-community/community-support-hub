@@ -319,7 +319,7 @@ export default function SignupForm() {
             id="bio"
             name="bio"
             rows={3}
-            value={formData.bio}
+            value={formData.bio || ''}
             onChange={handleInputChange}
             className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${
               errors.bio ? 'border-red-300' : 'border-gray-300'
@@ -328,7 +328,7 @@ export default function SignupForm() {
           />
         </div>
         {errors.bio && <p className="mt-1 text-sm text-red-600">{errors.bio}</p>}
-        <p className="mt-1 text-sm text-gray-500">{formData.bio.length}/500 characters</p>
+        <p className="mt-1 text-sm text-gray-500">{(formData.bio || '').length}/500 characters</p>
       </div>
 
       {/* Company/Role */}
@@ -341,7 +341,7 @@ export default function SignupForm() {
             id="companyRole"
             name="companyRole"
             type="text"
-            value={formData.companyRole}
+            value={formData.companyRole || ''}
             onChange={handleInputChange}
             className="appearance-none block w-full px-3 py-2 pl-10 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             placeholder="e.g. Senior Developer at TechCorp"
@@ -360,7 +360,7 @@ export default function SignupForm() {
             id="location"
             name="location"
             type="text"
-            value={formData.location}
+            value={formData.location || ''}
             onChange={handleInputChange}
             className="appearance-none block w-full px-3 py-2 pl-10 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             placeholder="e.g. San Francisco, CA"
@@ -379,7 +379,7 @@ export default function SignupForm() {
             id="website"
             name="website"
             type="url"
-            value={formData.website}
+            value={formData.website || ''}
             onChange={handleInputChange}
             className={`appearance-none block w-full px-3 py-2 pl-10 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${
               errors.website ? 'border-red-300' : 'border-gray-300'
@@ -401,7 +401,7 @@ export default function SignupForm() {
             id="expertiseTags"
             name="expertiseTags"
             type="text"
-            value={formData.expertiseTags}
+            value={formData.expertiseTags || ''}
             onChange={handleInputChange}
             className="appearance-none block w-full px-3 py-2 pl-10 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             placeholder="e.g. React, Node.js, TypeScript, Python"
