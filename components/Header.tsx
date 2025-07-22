@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Search, User, MessageCircle, Trophy } from 'lucide-react'
+import { Search, User, MessageCircle, Trophy, UserPlus } from 'lucide-react'
 
 export default function Header() {
   return (
@@ -43,6 +43,13 @@ export default function Header() {
               <Search className="w-5 h-5" />
             </Link>
             <Link 
+              href="/signup" 
+              className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+            >
+              <UserPlus className="w-4 h-4 mr-2" />
+              Sign Up
+            </Link>
+            <Link 
               href="/questions/ask" 
               className="btn-primary text-sm"
             >
@@ -76,6 +83,13 @@ export default function Header() {
             >
               <Trophy className="w-5 h-5 mb-1" />
               <span className="text-xs">Badges</span>
+            </Link>
+            <Link 
+              href="/signup" 
+              className="flex flex-col items-center py-2 text-gray-600 hover:text-gray-900"
+            >
+              <UserPlus className="w-5 h-5 mb-1" />
+              <span className="text-xs">Sign Up</span>
             </Link>
           </nav>
         </div>
