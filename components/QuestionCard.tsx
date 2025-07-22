@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { formatDistanceToNow } from 'date-fns'
 import { MessageCircle, Eye, CheckCircle, User } from 'lucide-react'
 import type { Question } from '@/types'
 import UserAvatar from '@/components/UserAvatar'
+import { formatTimeAgo } from '@/lib/utils'
 
 interface QuestionCardProps {
   question: Question
@@ -93,7 +93,7 @@ export default function QuestionCard({ question, showAuthor = true }: QuestionCa
             {viewsCount}
           </div>
           <time dateTime={question.created_at}>
-            {formatDistanceToNow(new Date(question.created_at), { addSuffix: true })}
+            {formatTimeAgo(question.created_at)}
           </time>
         </div>
       </div>

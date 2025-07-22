@@ -1,8 +1,8 @@
-import { formatDistanceToNow } from 'date-fns'
 import { ThumbsUp, CheckCircle, Code } from 'lucide-react'
 import UserAvatar from './UserAvatar'
 import type { Answer } from '@/types'
 import Link from 'next/link'
+import { formatTimeAgo } from '@/lib/utils'
 
 interface AnswerCardProps {
   answer: Answer
@@ -65,7 +65,7 @@ export default function AnswerCard({ answer }: AnswerCardProps) {
           <div className="flex items-center gap-3">
             <div className="text-right">
               <p className="text-xs text-gray-500">
-                answered {formatDistanceToNow(new Date(answer.created_at), { addSuffix: true })}
+                answered {formatTimeAgo(answer.created_at)}
               </p>
             </div>
             <UserAvatar user={author} size="sm" />

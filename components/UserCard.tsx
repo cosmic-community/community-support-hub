@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { MapPin, Globe, Calendar, Trophy } from 'lucide-react'
-import { format } from 'date-fns'
 import UserAvatar from './UserAvatar'
 import type { User } from '@/types'
+import { formatDate } from '@/lib/utils'
 
 interface UserCardProps {
   user: User
@@ -10,7 +10,7 @@ interface UserCardProps {
 
 export default function UserCard({ user }: UserCardProps) {
   const reputation = user.metadata?.reputation_score || 0
-  const joinDate = user.metadata?.join_date ? new Date(user.metadata.join_date) : null
+  const joinDate = user.metadata?.join_date
   const location = user.metadata?.location
   const website = user.metadata?.website
   const expertiseTags = user.metadata?.expertise_tags?.split(',').map(tag => tag.trim()) || []
@@ -96,7 +96,7 @@ export default function UserCard({ user }: UserCardProps) {
         {joinDate && (
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4" />
-            <span>Joined {format(joinDate, 'MMM yyyy')}</span>
+            <span>Joined {formatDate(joinDate)}</span>
           </div>
         )}
       </div>
